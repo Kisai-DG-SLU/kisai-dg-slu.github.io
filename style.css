@@ -386,6 +386,14 @@ pre code {
   cursor: not-allowed;
 }
 
+.hero__separator {
+    border: none;
+    border-top: 1.5px solid var(--color-primary);
+    width: 60px;
+    margin: 24px 0 24px 0;
+    opacity: 0.2;
+}
+
 /* Form elements */
 .form-control {
   display: block;
