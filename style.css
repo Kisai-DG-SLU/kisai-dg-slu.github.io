@@ -2048,11 +2048,6 @@ select.form-control {
         font-size: var(--font-size-lg);
     }
 
-    .hero__image-placeholder {
-        width: 200px;
-        height: 200px;
-    }
-
     .skills__container {
         grid-template-columns: 1fr;
         gap: var(--space-24);
