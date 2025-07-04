@@ -1338,7 +1338,7 @@ select.form-control {
 }
 
 .nav__logo-icon {
-    height: 128px;
+    height: 64px;
     width: auto;  /* garde le ratio */
     vertical-align: middle;
     margin-right: 12px;
