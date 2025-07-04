@@ -1338,7 +1338,10 @@ select.form-control {
 }
 
 .nav__logo-icon {
-    font-size: var(--font-size-xl);
+    height: 64px; /* ou la taille souhaitée */
+    width: auto;  /* garde le ratio */
+    vertical-align: middle;
+    margin-right: 12px;
 }
 
 /* Style pour le logo : logo entreprise à gauche de "Damien GUESDON" */
