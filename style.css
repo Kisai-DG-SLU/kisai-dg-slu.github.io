@@ -1344,6 +1344,16 @@ select.form-control {
     margin-right: 12px;
 }
 
+.photo-profil {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: url('images/photo.jpg') center/cover no-repeat, var(--color-secondary);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border: 3px solid var(--color-primary);
+  display: block;
+}
+
 /* Style pour le logo : logo entreprise à gauche de "Damien GUESDON" */
 .nav__logo {
     font-size: var(--font-size-2xl);
