@@ -12,3 +12,7 @@ Vous y trouverez :
 - [LinkedIn](https://www.linkedin.com/in/damienguesdon/)
 - [GitHub](https://github.com/Kisai-DG-SLU)
 - kisai.dg.slu@gmail.com
+
+## Status
+- Dashboard Refactoring: Active
+- CI/CD: Operational (Sovereign Mode)
