@@ -1,0 +1,11 @@
+name: training-dashboard
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - typer
+  - pydantic
+  - ruff
+  - pytest
+  - pytest-cov

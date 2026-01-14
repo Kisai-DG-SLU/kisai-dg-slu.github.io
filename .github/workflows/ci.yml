@@ -1,0 +1,160 @@
+name: Dashboard-CI
+
+on:
+  push:
+    branches:
+      - main
+      - 'feat/*'
+      - 'fix/*'
+      - 'docs/*'
+
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+  id-token: write
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    outputs:
+      should_merge: ${{ steps.check_merge.outputs.should_merge }}
+    defaults:
+      run:
+        shell: bash -el {0}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-update-conda: true
+        environment-file: ./environment.yml
+        activate-environment: training-dashboard
+        auto-activate-base: false
+
+    - name: Run Quality Check (Scanner & Tests)
+      run: |
+        cd scanner
+        python main.py
+        pytest --cov=. --cov-report=html:../coverage-report
+      env:
+        PYTHONPATH: .
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install & Build Frontend
+      run: |
+        cd frontend
+        npm install
+        npm run build
+
+    - name: Assemble Public Site
+      run: |
+        mkdir -p public
+        cp -r frontend/dist/* public/
+        cp -r coverage-report public/coverage
+        mkdir -p public/data
+        cp data/projects.json public/data/
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: dashboard-site
+        path: public
+
+    - name: Check if merge required
+      id: check_merge
+      run: |
+        if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
+          echo "should_merge=true" >> $GITHUB_OUTPUT
+        else
+          echo "should_merge=false" >> $GITHUB_OUTPUT
+        fi
+
+  auto-merge-and-release:
+    needs: ci
+    if: needs.ci.outputs.should_merge == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        ref: ${{ github.ref_name }}
+        token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+
+    - name: Configure Git
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+    - name: Merge Logic
+      env:
+        SOURCE_BRANCH: ${{ github.ref_name }}
+        GH_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Creating/Finding PR for $SOURCE_BRANCH..."
+        gh pr create --base main --head "$SOURCE_BRANCH" --title "chore: automated merge $SOURCE_BRANCH" --body "CI quality gate passed." || echo "PR exists"
+        
+        PR_URL=$(gh pr list --head "$SOURCE_BRANCH" --json url --jq '.[0].url')
+        echo "Found PR: $PR_URL"
+        
+        echo "Waiting for PR to stabilize..."
+        for i in {1..10}; do
+          STATE=$(gh pr view "$PR_URL" --json mergeable --jq .mergeable)
+          if [ "$STATE" != "UNKNOWN" ]; then 
+            echo "PR stabilized with state: $STATE"
+            break
+          fi
+          echo "Still UNKNOWN, waiting..."
+          sleep 2
+        done
+        
+        echo "Enabling Auto-merge for $PR_URL"
+        gh pr merge --auto --merge --delete-branch "$PR_URL"
+
+  deploy-production:
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download Build Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: dashboard-site
+        path: ./public
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        force_orphan: true
+
+  release:
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+    
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.71.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: patch
