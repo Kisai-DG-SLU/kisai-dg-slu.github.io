@@ -34,8 +34,6 @@ jobs:
           python-version: "3.10"
           auto-activate-base: false
 
-      - name: Install Python dependencies
-        run: pip install typer pydantic ruff pytest pytest-cov
 
       - name: Run Scanner & Tests (Quality Gate)
         run: |
