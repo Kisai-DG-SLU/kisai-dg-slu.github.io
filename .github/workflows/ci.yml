@@ -24,7 +24,8 @@ jobs:
         shell: bash -el {0}
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -32,7 +33,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-update-conda: true
-        environment-file: environment.yml
+        environment-file: ./environment.yml
         activate-environment: training-dashboard
         auto-activate-base: false
 
