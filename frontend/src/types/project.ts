@@ -24,6 +24,7 @@ export interface Project {
   id: number;
   title: string;
   status: ProjectStatus;
+  progress: number;
   duration: string;
   link?: string;
   icon: string;
