@@ -68,10 +68,10 @@
   "formation": {
     "title": "Parcours AI Engineer – OpenClassrooms",
     "total_hours": 804,
-    "completed_hours": 14,
-    "current_project": 2,
+    "completed_hours": 284,
+    "current_project": 8,
     "projects_total": 15,
-    "completed_projects_count": 1
+    "completed_projects_count": 7
   },
   "projects": [
     {
@@ -80,70 +80,78 @@
       "status": "completed",
       "duration": "14h",
       "link": "https://kisai-dg-slu.github.io/decouverte_IA_engineer/",
+      "progress": 100,
       "icon": "✅",
       "github_url": null
     },
     {
       "id": 2,
       "title": "Requêtez des services IA",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "30h",
       "link": "https://github.com/Kisai-DG-SLU/projet2/",
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": null
     },
     {
       "id": 3,
       "title": "Anticipez les besoins en consommation de bâtiments",
-      "status": "upcoming",
+      "status": "completed",
       "duration": "30h",
       "link": "https://github.com/Kisai-DG-SLU/projet3/",
-      "icon": "📅",
+      "progress": 100,
+      "icon": "✅",
       "github_url": null
     },
     {
       "id": 4,
       "title": "Classifiez automatiquement des informations",
-      "status": "upcoming",
+      "status": "completed",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/projet4/",
-      "icon": "📅",
+      "progress": 100,
+      "icon": "✅",
       "github_url": null
     },
     {
       "id": 5,
       "title": "Déployez un modèle de Machine Learning",
-      "status": "upcoming",
+      "status": "completed",
       "duration": "40h",
       "link": "https://github.com/Kisai-DG-SLU/projet5/",
-      "icon": "📅",
+      "progress": 100,
+      "icon": "✅",
       "github_url": null
     },
     {
       "id": 6,
       "title": "Initiez-vous au MLOps (partie 1/2)",
-      "status": "upcoming",
+      "status": "completed",
       "duration": "60h",
       "link": "https://github.com/Kisai-DG-SLU/projet6/",
-      "icon": "📅",
+      "progress": 100,
+      "icon": "✅",
       "github_url": null
     },
     {
       "id": 7,
       "title": "Concevez et déployez un système RAG",
-      "status": "upcoming",
+      "status": "completed",
       "duration": "60h",
       "link": "https://github.com/Kisai-DG-SLU/projet7/",
-      "icon": "📅",
+      "progress": 100,
+      "icon": "✅",
       "github_url": null
     },
     {
       "id": 8,
       "title": "Confirmez vos compétences en MLOps (partie 2/2)",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/projet8/",
-      "icon": "📅",
+      "progress": 76,
+      "icon": "🔄",
       "github_url": null
     },
     {
@@ -152,6 +160,7 @@
       "status": "upcoming",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/projet9/",
+      "progress": 0,
       "icon": "📅",
       "github_url": null
     },
@@ -161,6 +170,7 @@
       "status": "upcoming",
       "duration": "40h",
       "link": "https://github.com/Kisai-DG-SLU/projet10/",
+      "progress": 0,
       "icon": "📅",
       "github_url": null
     },
@@ -170,6 +180,7 @@
       "status": "upcoming",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/projet11/",
+      "progress": 0,
       "icon": "📅",
       "github_url": null
     },
@@ -179,6 +190,7 @@
       "status": "upcoming",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/projet12/",
+      "progress": 0,
       "icon": "📅",
       "github_url": null
     },
@@ -188,6 +200,7 @@
       "status": "upcoming",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/projet13/",
+      "progress": 0,
       "icon": "📅",
       "github_url": null
     },
@@ -197,6 +210,7 @@
       "status": "upcoming",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/projet14/",
+      "progress": 0,
       "icon": "📅",
       "github_url": null
     },
@@ -206,6 +220,7 @@
       "status": "upcoming",
       "duration": "60h",
       "link": "https://github.com/Kisai-DG-SLU/projet15/",
+      "progress": 0,
       "icon": "📅",
       "github_url": null
     }

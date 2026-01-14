@@ -1,5 +1,5 @@
 import json
-import os
+import re
 from pathlib import Path
 import typer
 from models import DashboardData, ProjectStatus, Project
@@ -7,55 +7,77 @@ from models import DashboardData, ProjectStatus, Project
 app = typer.Typer()
 
 DATA_PATH = Path("../data/projects.json")
-PROJECTS_ROOT = Path("..")
+PROJECTS_ROOT = Path("/Users/daminou/Documents/Formation_IA")
 
-def load_data() -> DashboardData:
-    if not DATA_PATH.exists():
-        typer.echo(f"Erreur : {DATA_PATH} introuvable.")
-        raise typer.Exit(code=1)
+def calculate_progress_from_tasks(project_dir: Path) -> int:
+    # On cherche current_tasks.md de manière récursive dans le projet
+    tasks_files = list(project_dir.rglob("current_tasks.md"))
+    if not tasks_files:
+        return 0
     
-    with open(DATA_PATH, "r", encoding="utf-8") as f:
-        return DashboardData(**json.load(f))
+    # On prend le premier trouvé (généralement le plus proche de la racine)
+    tasks_file = tasks_files[0]
+    
+    try:
+        content = tasks_file.read_text(encoding="utf-8")
+        tasks = re.findall(r"- \[([x ])\]", content)
+        if not tasks:
+            return 0
+        completed = tasks.count("x")
+        return int((completed / len(tasks)) * 100)
+    except:
+        return 0
 
-def save_data(data: DashboardData):
-    with open(DATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(data.model_dump(), f, indent=2, ensure_ascii=False)
+def get_project_intel(project_id: int) -> tuple[ProjectStatus, int]:
+    if project_id <= 7:
+        return ProjectStatus.COMPLETED, 100
+    
+    project_dir = PROJECTS_ROOT / f"Projet_{project_id}"
+    if not project_dir.exists():
+        return ProjectStatus.UPCOMING, 0
+    
+    progress = calculate_progress_from_tasks(project_dir)
+    
+    if progress == 100 or (project_dir / ".completed").exists():
+        return ProjectStatus.COMPLETED, 100
+    
+    return ProjectStatus.IN_PROGRESS, progress
 
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context):
-    """Scanne les répertoires locaux et met à jour le dashboard."""
     if ctx.invoked_subcommand is None:
         scan()
 
 @app.command()
 def scan():
-    """Scanne les répertoires locaux et met à jour le dashboard."""
-    data = load_data()
+    """Scanne les répertoires et calcule l'avancement réel (Recursive)."""
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
+        data = DashboardData(**json.load(f))
     
-    # Simulation de la logique de détection
-    # Pour le MVP, on regarde si le dossier Projet_X existe
+    completed_count = 0
+    total_hours_done = 0
+    
     for project in data.projects:
-        project_dir = PROJECTS_ROOT / f"Projet_{project.id}"
+        status, progress = get_project_intel(project.id)
+        project.status = status
+        project.progress = progress
+        project.icon = "✅" if status == ProjectStatus.COMPLETED else ("🔄" if status == ProjectStatus.IN_PROGRESS else "📅")
         
-        if project_dir.exists():
-            # Logique simple : si le dossier existe, il est au moins 'upcoming'
-            # On pourrait chercher un fichier spécifique pour marquer 'completed'
-            if (project_dir / ".completed").exists():
-                project.status = ProjectStatus.COMPLETED
-                project.icon = "✅"
-            elif project.status == ProjectStatus.UPCOMING:
-                # Si le dossier existe mais pas de .completed, on passe en in_progress
-                project.status = ProjectStatus.IN_PROGRESS
-                project.icon = "🔄"
-        
-    # Recalcul des stats de formation
-    completed_projects = [p for p in data.projects if p.status == ProjectStatus.COMPLETED]
-    data.formation.completed_projects_count = len(completed_projects)
-    # Simulation d'heures (à affiner avec les réelles données)
-    # data.formation.completed_hours = sum(int(p.duration.replace('h', '')) for p in completed_projects)
+        if status == ProjectStatus.COMPLETED:
+            completed_count += 1
+            try:
+                total_hours_done += int(project.duration.replace('h', ''))
+            except: pass
+        elif status == ProjectStatus.IN_PROGRESS:
+            data.formation.current_project = project.id
 
-    save_data(data)
-    typer.echo("Scan terminé et data/projects.json mis à jour.")
+    data.formation.completed_projects_count = completed_count
+    data.formation.completed_hours = total_hours_done
+    
+    with open(DATA_PATH, "w", encoding="utf-8") as f:
+        json.dump(data.model_dump(), f, indent=2, ensure_ascii=False)
+    
+    typer.echo(f"✅ Dashboard Intelligence (Recursive) : {completed_count} projets finis.")
 
 if __name__ == "__main__":
     app()
