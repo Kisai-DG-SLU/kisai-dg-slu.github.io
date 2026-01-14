@@ -29,8 +29,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # Data
-data/projects.json
 
 # IDE
 .vscode/
 .idea/
+
+# Data
+/data/*
+!/data/projects.json
