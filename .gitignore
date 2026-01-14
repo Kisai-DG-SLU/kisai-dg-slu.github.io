@@ -37,3 +37,11 @@ yarn-error.log*
 # Data
 /data/*
 !/data/projects.json
+
+# STEALTH MODE
+_bmad/
+specs/
+GEMINI.md
+SESSION_LOG.md
+.envrc
+environment.yml
