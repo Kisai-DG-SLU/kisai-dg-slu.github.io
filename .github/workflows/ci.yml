@@ -1,17 +1,20 @@
-name: Deploy Dashboard
+name: Souveraineté CI - Build, Promote & Deploy
 
 on:
   push:
-    branches: [ main, feat/refactor-to-react ]
+    branches: [ 'feat/*', 'fix/*', 'docs/*' ]
+  push:
+    branches: [ 'main' ]
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
   pages: write
   id-token: write
 
 jobs:
-  build-and-deploy:
+  build-and-validate:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -20,6 +23,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Conda
         uses: conda-incubator/setup-miniconda@v3
@@ -30,19 +35,12 @@ jobs:
           auto-activate-base: false
 
       - name: Install Python dependencies
-        run: |
-          pip install typer pydantic ruff pytest pytest-cov
+        run: pip install typer pydantic ruff pytest pytest-cov
 
-      - name: Run Scanner
+      - name: Run Scanner & Tests (Quality Gate)
         run: |
           cd scanner
           python main.py
-        env:
-          PYTHONPATH: .
-
-      - name: Run Tests & Generate Coverage
-        run: |
-          cd scanner
           pytest --cov=. --cov-report=html:../coverage-report
         env:
           PYTHONPATH: .
@@ -54,28 +52,49 @@ jobs:
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install Frontend dependencies
-        run: |
-          cd frontend
-          npm install
-
       - name: Build Frontend
         run: |
           cd frontend
+          npm install
           npm run build
 
-      - name: Assemble Final Site
+      - name: Assemble Artifacts
         run: |
           mkdir -p public
           cp -r frontend/dist/* public/
           cp -r coverage-report public/coverage
-          # S'assurer que le fichier data est présent pour le frontend buildé
           mkdir -p public/data
           cp data/projects.json public/data/
 
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-site
+          path: public/
+          retention-days: 1
+
+      - name: AUTO-PROMOTE to main
+        if: startsWith(github.ref, 'refs/heads/feat/') || startsWith(github.ref, 'refs/heads/fix/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          gh pr create --title "AI: $BRANCH_NAME" --body "Automated promotion" --base main --head $BRANCH_NAME || echo "PR exists"
+          gh pr merge --auto --merge --delete-branch || echo "Merge logic handled"
+
+  deploy-to-pages:
+    needs: build-and-validate
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dashboard-site
+          path: ./public
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
