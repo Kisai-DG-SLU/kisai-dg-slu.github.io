@@ -11,17 +11,17 @@ function App() {
   const { data, loading, error } = useDashboardData();
 
   if (loading) return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background">
       <div className="w-12 h-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin mb-4"></div>
       <p className="text-gray-600 font-medium">Chargement du dashboard...</p>
     </div>
   );
   
-  if (error) return <div className="text-red-500 text-center py-20 bg-gray-50 min-h-screen flex items-center justify-center">Erreur : {error}</div>;
+  if (error) return <div className="text-red-500 text-center py-20 bg-background min-h-screen flex items-center justify-center">Erreur : {error}</div>;
   if (!data) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50 scroll-smooth">
+    <div className="min-h-screen bg-background scroll-smooth">
       <Header />
       <main>
         <Hero />

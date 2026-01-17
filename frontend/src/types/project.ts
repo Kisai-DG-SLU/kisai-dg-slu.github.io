@@ -18,7 +18,12 @@ export interface Formation {
   completed_projects_count: number;
 }
 
-export type ProjectStatus = 'completed' | 'in_progress' | 'upcoming';
+export enum ProjectStatus {
+  COMPLETED = 'completed',
+  IN_PROGRESS = 'in_progress',
+  UPCOMING = 'upcoming',
+}
+
 
 export interface Project {
   id: number;
