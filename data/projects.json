@@ -35,43 +35,43 @@
     "ai": [
       {
         "title": "Python",
-        "description": "Scripts, automatisation.",
-        "level": 15
+        "description": "Script, Fastapi, Automatisation, Backend dev.",
+        "level": 93
       },
       {
         "title": "Git & GitHub",
-        "description": "Gestion de versions, workflows.",
-        "level": 25
+        "description": "Workflow, Ci/cd.",
+        "level": 82
       },
       {
         "title": "Machine Learning",
-        "description": "Concepts fondamentaux.",
-        "level": 5
+        "description": "Scikit-learn, Classification, Feature engineering, Modèle prédictif, Régression.",
+        "level": 96
       },
       {
         "title": "MLOps",
-        "description": "À venir.",
-        "level": 0
+        "description": "Docker, Orchestration.",
+        "level": 78
       },
       {
         "title": "Deep Learning",
-        "description": "À venir.",
-        "level": 0
+        "description": "Pytorch, NLP, Récurrent, Tensorflow.",
+        "level": 62
       },
       {
         "title": "RAG",
-        "description": "À venir.",
-        "level": 0
+        "description": "Embedding, Langchain, Vector database.",
+        "level": 88
       }
     ]
   },
   "formation": {
     "title": "Parcours AI Engineer – OpenClassrooms",
     "total_hours": 804,
-    "completed_hours": 284,
-    "current_project": 8,
+    "completed_hours": 334,
+    "current_project": 9,
     "projects_total": 15,
-    "completed_projects_count": 7
+    "completed_projects_count": 8
   },
   "projects": [
     {
@@ -79,150 +79,150 @@
       "title": "Découvrez le métier d'AI Engineer",
       "status": "completed",
       "duration": "14h",
-      "link": "https://kisai-dg-slu.github.io/decouverte_IA_engineer/",
+      "link": "https://github.com/Kisai-DG-SLU/decouverte_IA_engineer",
       "progress": 100,
       "icon": "✅",
-      "github_url": null
+      "github_url": "https://github.com/Kisai-DG-SLU/decouverte_IA_engineer"
     },
     {
       "id": 2,
       "title": "Requêtez des services IA",
       "status": "completed",
       "duration": "30h",
-      "link": "https://github.com/Kisai-DG-SLU/projet2/",
+      "link": "https://github.com/Kisai-DG-SLU/fashion-trend-intelligence",
       "progress": 100,
       "icon": "✅",
-      "github_url": null
+      "github_url": "https://github.com/Kisai-DG-SLU/fashion-trend-intelligence"
     },
     {
       "id": 3,
       "title": "Anticipez les besoins en consommation de bâtiments",
       "status": "completed",
       "duration": "30h",
-      "link": "https://github.com/Kisai-DG-SLU/projet3/",
+      "link": "https://github.com/Kisai-DG-SLU/seattle-energy-prediction",
       "progress": 100,
       "icon": "✅",
-      "github_url": null
+      "github_url": "https://github.com/Kisai-DG-SLU/seattle-energy-prediction"
     },
     {
       "id": 4,
       "title": "Classifiez automatiquement des informations",
       "status": "completed",
       "duration": "50h",
-      "link": "https://github.com/Kisai-DG-SLU/projet4/",
+      "link": "https://github.com/Kisai-DG-SLU/attrition-esn",
       "progress": 100,
       "icon": "✅",
-      "github_url": null
+      "github_url": "https://github.com/Kisai-DG-SLU/attrition-esn"
     },
     {
       "id": 5,
       "title": "Déployez un modèle de Machine Learning",
       "status": "completed",
       "duration": "40h",
-      "link": "https://github.com/Kisai-DG-SLU/projet5/",
+      "link": "https://github.com/Kisai-DG-SLU/attrition-esn-model",
       "progress": 100,
       "icon": "✅",
-      "github_url": null
+      "github_url": "https://github.com/Kisai-DG-SLU/attrition-esn-model"
     },
     {
       "id": 6,
       "title": "Initiez-vous au MLOps (partie 1/2)",
       "status": "completed",
       "duration": "60h",
-      "link": "https://github.com/Kisai-DG-SLU/projet6/",
+      "link": "https://github.com/Kisai-DG-SLU/credit-scoring",
       "progress": 100,
       "icon": "✅",
-      "github_url": null
+      "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring"
     },
     {
       "id": 7,
       "title": "Concevez et déployez un système RAG",
       "status": "completed",
       "duration": "60h",
-      "link": "https://github.com/Kisai-DG-SLU/projet7/",
+      "link": "https://github.com/Kisai-DG-SLU/culture-ia",
       "progress": 100,
       "icon": "✅",
-      "github_url": null
+      "github_url": "https://github.com/Kisai-DG-SLU/culture-ia"
     },
     {
       "id": 8,
       "title": "Confirmez vos compétences en MLOps (partie 2/2)",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "50h",
-      "link": "https://github.com/Kisai-DG-SLU/projet8/",
-      "progress": 76,
-      "icon": "🔄",
-      "github_url": null
+      "link": "https://github.com/Kisai-DG-SLU/credit-scoring-app",
+      "progress": 100,
+      "icon": "✅",
+      "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring-app"
     },
     {
       "id": 9,
       "title": "Évaluez les performances d'un LLM",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "50h",
-      "link": "https://github.com/Kisai-DG-SLU/projet9/",
+      "link": "https://github.com/Kisai-DG-SLU/cadrage_ia",
       "progress": 0,
-      "icon": "📅",
-      "github_url": null
+      "icon": "🔄",
+      "github_url": "https://github.com/Kisai-DG-SLU/cadrage_ia"
     },
     {
       "id": 10,
       "title": "Labellisez et appliquez des approches semi-supervisées",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "40h",
-      "link": "https://github.com/Kisai-DG-SLU/projet10/",
+      "link": "https://github.com/Kisai-DG-SLU/label_image",
       "progress": 0,
-      "icon": "📅",
-      "github_url": null
+      "icon": "🔄",
+      "github_url": "https://github.com/Kisai-DG-SLU/label_image"
     },
     {
       "id": 11,
       "title": "Entraînez votre agent RL",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "80h",
-      "link": "https://github.com/Kisai-DG-SLU/projet11/",
+      "link": "https://github.com/Kisai-DG-SLU/atterrisseur_lunaire",
       "progress": 0,
-      "icon": "📅",
-      "github_url": null
+      "icon": "🔄",
+      "github_url": "https://github.com/Kisai-DG-SLU/atterrisseur_lunaire"
     },
     {
       "id": 12,
       "title": "Extrayez des données multimodales de sites web",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "80h",
-      "link": "https://github.com/Kisai-DG-SLU/projet12/",
+      "link": "https://github.com/Kisai-DG-SLU/fakenews_killer",
       "progress": 0,
-      "icon": "📅",
-      "github_url": null
+      "icon": "🔄",
+      "github_url": "https://github.com/Kisai-DG-SLU/fakenews_killer"
     },
     {
       "id": 13,
       "title": "Mettez en place des Agents IA",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "80h",
-      "link": "https://github.com/Kisai-DG-SLU/projet13/",
+      "link": "https://github.com/Kisai-DG-SLU/chess_master",
       "progress": 0,
-      "icon": "📅",
-      "github_url": null
+      "icon": "🔄",
+      "github_url": "https://github.com/Kisai-DG-SLU/chess_master"
     },
     {
       "id": 14,
       "title": "Finetunez votre propre LLM",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "80h",
-      "link": "https://github.com/Kisai-DG-SLU/projet14/",
+      "link": "https://github.com/Kisai-DG-SLU/poso_logic",
       "progress": 0,
-      "icon": "📅",
-      "github_url": null
+      "icon": "🔄",
+      "github_url": "https://github.com/Kisai-DG-SLU/poso_logic"
     },
     {
       "id": 15,
       "title": "Réalisez le portfolio Ingénieur IA",
-      "status": "upcoming",
+      "status": "in_progress",
       "duration": "60h",
-      "link": "https://github.com/Kisai-DG-SLU/projet15/",
+      "link": "https://github.com/Kisai-DG-SLU/portfolio",
       "progress": 0,
-      "icon": "📅",
-      "github_url": null
+      "icon": "🔄",
+      "github_url": "https://github.com/Kisai-DG-SLU/portfolio"
     }
   ]
 }
