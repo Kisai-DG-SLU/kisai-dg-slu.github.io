@@ -1,96 +1,120 @@
-import { Formation as FormationType, Project } from '../types/project';
+import { Formation as FormationType, Project, ProjectStatus } from '../types/project';
 
 interface FormationProps {
   formation: FormationType;
   projects: Project[];
 }
 
+const EllipsisItem = () => (
+  <div className="timeline__item timeline__item--ellipsis">
+    <div className="timeline__marker"></div>
+    <div className="timeline__content">
+      <h4>...</h4>
+    </div>
+  </div>
+);
+
 const Formation = ({ formation, projects }: FormationProps) => {
   const progressPercentage = (formation.completed_hours / formation.total_hours) * 100;
   
-  // On récupère quelques jalons clés pour la timeline (ex: terminés, en cours, et les gros jalons à venir)
-  const timelineProjects = projects.filter(p => 
-    p.status === 'completed' || 
-    p.status === 'in_progress' || 
-    [7, 11, 15].includes(p.id)
-  ).slice(0, 5);
+  const completedProjects = projects.filter(p => p.status === ProjectStatus.COMPLETED);
+  const inProgressProjects = projects.filter(p => p.status === ProjectStatus.IN_PROGRESS);
+
+  const firstCompletedProject = completedProjects.length > 0 ? completedProjects[0] : null;
+  const lastCompletedProject = completedProjects.length > 0 ? completedProjects[completedProjects.length - 1] : null;
+  const firstInProgressProject = inProgressProjects.length > 0 ? inProgressProjects[0] : null;
+
+  const displayedTimelineProjects: (Project | null)[] = [];
+  const hasSkippedCompleted = completedProjects.length > 2;
+
+  if (firstCompletedProject) {
+    displayedTimelineProjects.push(firstCompletedProject);
+  }
+
+  if (hasSkippedCompleted) {
+    // Add ellipsis if there's a gap between first and last completed and more than 2 completed projects
+    if (firstCompletedProject?.id !== lastCompletedProject?.id) {
+        displayedTimelineProjects.push(null); // Use null as a placeholder for ellipsis
+    }
+  }
+
+  if (lastCompletedProject && (lastCompletedProject.id !== firstCompletedProject?.id || !firstCompletedProject)) {
+    displayedTimelineProjects.push(lastCompletedProject);
+  }
+
+  if (firstInProgressProject) {
+    // Ensure first in-progress is not already the last completed if they are the same project
+    if (!lastCompletedProject || firstInProgressProject.id !== lastCompletedProject.id) {
+        displayedTimelineProjects.push(firstInProgressProject);
+    }
+  }
 
   return (
-    <section id="formation" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-16 relative pb-4">
-          Suivi de la formation IA
-          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-[var(--color-primary)] rounded-full"></span>
-        </h2>
-
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
-          {/* Header Progress */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6 text-center md:text-left">
-              {formation.title}
-            </h3>
-            <div className="space-y-4">
-              <div className="flex justify-between items-end">
-                <span className="text-gray-600 font-medium">Progression globale</span>
-                <span className="text-[var(--color-primary)] font-bold text-lg">
-                  {Math.round(progressPercentage)}% ({formation.completed_hours}h / {formation.total_hours}h)
-                </span>
-              </div>
-              <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-linear-to-r from-[var(--color-primary)] to-cyan-500 transition-all duration-1000 ease-out"
-                  style={{ width: `${progressPercentage}%` }}
-                ></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-              <span className="block text-sm text-gray-500 mb-1">Durée</span>
-              <span className="text-lg font-bold text-gray-900">12 mois</span>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-              <span className="block text-sm text-gray-500 mb-1">Projets</span>
-              <span className="text-lg font-bold text-gray-900">{formation.completed_projects_count} / {formation.projects_total}</span>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-              <span className="block text-sm text-gray-500 mb-1">Statut actuel</span>
-              <span className="text-lg font-bold text-[var(--color-primary)]">Projet {formation.current_project}</span>
-            </div>
-          </div>
-
-          {/* Timeline Simplified */}
-          <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-linear-to-b before:from-transparent before:via-gray-300 before:to-transparent">
-            {timelineProjects.map((project) => (
-              <div key={project.id} className={`relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group ${
-                project.status === 'completed' ? 'is-completed' : ''
-              }`}>
-                {/* Icon Marker */}
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full border border-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 ${
-                  project.status === 'completed' ? 'bg-[var(--color-primary)] text-white' : 
-                  project.status === 'in_progress' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-400'
-                }`}>
-                  {project.status === 'completed' ? '✓' : project.id}
+    <section id="formation" className="formation">
+        <div className="container">
+            <h2 className="section__title">Suivi de la formation IA (OpenClassrooms)</h2>
+            <div className="formation__content">
+                <div className="formation__header">
+                    <h3 className="formation__title">{formation.title}</h3>
+                    <div className="formation__progress">
+                        <div className="formation__progress-bar">
+                            <div className="progress-bar" style={{ 
+                                background: `linear-gradient(to right, var(--color-primary) ${progressPercentage}%, var(--color-secondary) ${progressPercentage}%)`,
+                                width: '100%',
+                                height: '100%'
+                            }}></div>
+                        </div>
+                        <span className="formation__progress-text">
+                            {Math.round(progressPercentage)}% ({formation.completed_hours}h terminées sur {formation.total_hours}h totales)
+                        </span>
+                    </div>
                 </div>
-                {/* Content Card */}
-                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-gray-100 bg-white shadow-sm group-hover:shadow-md transition-all">
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <h4 className="font-bold text-gray-900 line-clamp-1">{project.title}</h4>
-                  </div>
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                    project.status === 'completed' ? 'bg-teal-50 text-teal-600' :
-                    project.status === 'in_progress' ? 'bg-orange-50 text-orange-600' : 'bg-gray-50 text-gray-400'
-                  }`}>
-                    {project.status === 'completed' ? 'Terminé' : project.status === 'in_progress' ? 'En cours' : 'À venir'}
-                  </span>
+                
+                <div className="formation__details">
+                    <div className="formation__info">
+                        <div className="formation__info-item">
+                            <span className="formation__info-label">Durée :</span>
+                            <span>12 mois ({formation.projects_total} projets professionnalisants)</span>
+                        </div>
+                        <div className="formation__info-item">
+                            <span className="formation__info-label">Avancement :</span>
+                            <span>{Math.round(progressPercentage)}% ({formation.completed_hours}h terminées sur {formation.total_hours}h totales)</span>
+                        </div>
+                        <div className="formation__info-item">
+                            <span className="formation__info-label">Statut :</span>
+                            <span>Projet {formation.completed_projects_count} terminé ✅, Projet {formation.current_project} en cours 🔄</span>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            ))}
-          </div>
+
+                <div className="formation__timeline">
+                    <div className="timeline">
+                        {displayedTimelineProjects.map((project, index) => (
+                            project === null ? (
+                                <EllipsisItem key={`ellipsis-${index}`} />
+                            ) : (
+                                <div key={project.id} className={`timeline__item ${
+                                    project.status === ProjectStatus.COMPLETED ? 'timeline__item--completed' : 
+                                    project.status === ProjectStatus.IN_PROGRESS ? 'timeline__item--current' : ''
+                                }`}>
+                                    <div className="timeline__marker"></div>
+                                    <div className="timeline__content">
+                                        <h4>Projet {project.id} : {project.title}</h4>
+                                        {project.status === ProjectStatus.COMPLETED ? (
+                                            <span className="status status--success">Terminé</span>
+                                        ) : project.status === ProjectStatus.IN_PROGRESS ? (
+                                            <span className="status status--warning">En cours ({project.progress}%)</span>
+                                        ) : (
+                                            <span className="timeline__date">{project.duration}</span>
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
   );
 };

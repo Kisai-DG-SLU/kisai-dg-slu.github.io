@@ -8,8 +8,14 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: 'rgba(33, 128, 141, 1)',
-          hover: 'rgba(29, 116, 128, 1)',
+          DEFAULT: 'var(--color-primary)',
+          hover: 'var(--color-primary-hover)',
+        },
+        background: 'var(--color-background)',
+        surface: 'var(--color-surface)',
+        text: {
+          DEFAULT: 'var(--color-text)',
+          secondary: 'var(--color-text-secondary)',
         }
       }
     },
