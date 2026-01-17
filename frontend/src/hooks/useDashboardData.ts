@@ -7,7 +7,7 @@ export const useDashboardData = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/data/projects.json')
+    fetch('./data/projects.json')
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load data');
         return res.json();
