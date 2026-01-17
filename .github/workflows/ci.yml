@@ -72,6 +72,12 @@ jobs:
         name: dashboard-site
         path: public
 
+    - name: Upload Pages Artifact
+      if: github.ref == 'refs/heads/main'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: public
+
     - name: Check if merge required
       id: check_merge
       run: |
@@ -125,22 +131,14 @@ jobs:
   deploy-production:
     needs: ci
     if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Download Build Artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: dashboard-site
-        path: ./public
-
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
-        force_orphan: true
+      id: deployment
+      uses: actions/deploy-pages@v4
 
   release:
     needs: ci
