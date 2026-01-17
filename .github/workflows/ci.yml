@@ -37,10 +37,9 @@ jobs:
         activate-environment: training-dashboard
         auto-activate-base: false
 
-    - name: Run Quality Check (Scanner & Tests)
+    - name: Run Quality Check (Tests)
       run: |
         cd scanner
-        python main.py
         pytest --cov=. --cov-report=html:../coverage-report
       env:
         PYTHONPATH: .
