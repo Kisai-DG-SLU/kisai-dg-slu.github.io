@@ -13,6 +13,7 @@ class Project(BaseModel):
     status: ProjectStatus
     duration: str
     link: Optional[str] = None
+    progress: int = 0
     icon: str
     github_url: Optional[str] = None
 
