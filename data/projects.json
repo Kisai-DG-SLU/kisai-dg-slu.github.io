@@ -56,7 +56,7 @@
       {
         "title": "Deep Learning",
         "description": "Pytorch, NLP, Récurrent, Tensorflow.",
-        "level": 70
+        "level": 62
       },
       {
         "title": "RAG",
@@ -68,10 +68,10 @@
   "formation": {
     "title": "Parcours AI Engineer – OpenClassrooms",
     "total_hours": 804,
-    "completed_hours": 384,
-    "current_project": 10,
+    "completed_hours": 380,
+    "current_project": 9,
     "projects_total": 15,
-    "completed_projects_count": 9
+    "completed_projects_count": 8
   },
   "projects": [
     {
@@ -157,11 +157,11 @@
     {
       "id": 9,
       "title": "Évaluez les performances d'un LLM",
-      "status": "completed",
+      "status": "in_progress",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/cadrage_ia",
-      "progress": 100,
-      "icon": "✅",
+      "progress": 93,
+      "icon": "🔄",
       "github_url": "https://github.com/Kisai-DG-SLU/cadrage_ia"
     },
     {
