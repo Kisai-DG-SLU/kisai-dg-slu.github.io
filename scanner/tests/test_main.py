@@ -1,10 +1,17 @@
 import pytest
+import json
 from pathlib import Path
-from main import load_data
+from models import DashboardData
 
-def test_load_data_exists():
-    # Vérifie que le fichier de données est lisible
-    # (Le chemin est relatif au dossier scanner dans le script principal)
-    data = load_data()
+DATA_PATH = Path(__file__).parent.parent.parent / "data" / "projects.json"
+
+def test_data_integrity():
+    # Vérifie que le fichier de données est lisible et respecte le schéma Pydantic
+    assert DATA_PATH.exists(), f"Data file not found at {DATA_PATH}"
+    
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
+        content = json.load(f)
+        data = DashboardData(**content)
+    
     assert data.formation.projects_total == 15
     assert len(data.projects) == 15

@@ -30,7 +30,7 @@ class Formation(BaseModel):
     title: str
     total_hours: int
     completed_hours: int
-    current_project: int
+    current_project: Optional[int] = None
     projects_total: int
     completed_projects_count: int
 
