@@ -35,43 +35,43 @@
     "ai": [
       {
         "title": "Python",
-        "description": "Script, Fastapi, Automatisation, Backend dev.",
-        "level": 93
+        "description": "À venir.",
+        "level": 0
       },
       {
         "title": "Git & GitHub",
-        "description": "Workflow, Ci/cd.",
-        "level": 82
+        "description": "À venir.",
+        "level": 0
       },
       {
         "title": "Machine Learning",
-        "description": "Scikit-learn, Classification, Feature engineering, Modèle prédictif, Régression.",
-        "level": 96
+        "description": "À venir.",
+        "level": 0
       },
       {
         "title": "MLOps",
-        "description": "Docker, Orchestration.",
-        "level": 78
+        "description": "À venir.",
+        "level": 0
       },
       {
         "title": "Deep Learning",
-        "description": "Pytorch, NLP, Récurrent, Tensorflow.",
-        "level": 62
+        "description": "À venir.",
+        "level": 0
       },
       {
         "title": "RAG",
-        "description": "Embedding, Langchain, Vector database.",
-        "level": 88
+        "description": "À venir.",
+        "level": 0
       }
     ]
   },
   "formation": {
     "title": "Parcours AI Engineer – OpenClassrooms",
     "total_hours": 804,
-    "completed_hours": 380,
-    "current_project": 9,
+    "completed_hours": 284,
+    "current_project": 8,
     "projects_total": 15,
-    "completed_projects_count": 8
+    "completed_projects_count": 7
   },
   "projects": [
     {
@@ -147,11 +147,11 @@
     {
       "id": 8,
       "title": "Confirmez vos compétences en MLOps (partie 2/2)",
-      "status": "completed",
+      "status": "in_progress",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/credit-scoring-app",
-      "progress": 100,
-      "icon": "✅",
+      "progress": 0,
+      "icon": "🔄",
       "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring-app"
     },
     {
@@ -160,7 +160,7 @@
       "status": "in_progress",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/cadrage_ia",
-      "progress": 93,
+      "progress": 0,
       "icon": "🔄",
       "github_url": "https://github.com/Kisai-DG-SLU/cadrage_ia"
     },
