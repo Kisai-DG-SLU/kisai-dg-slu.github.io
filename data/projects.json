@@ -35,43 +35,43 @@
     "ai": [
       {
         "title": "Python",
-        "description": "À venir.",
-        "level": 0
+        "description": "Script, Fastapi, Automatisation, Backend dev.",
+        "level": 93
       },
       {
         "title": "Git & GitHub",
-        "description": "À venir.",
-        "level": 0
+        "description": "Workflow, Ci/cd.",
+        "level": 82
       },
       {
         "title": "Machine Learning",
-        "description": "À venir.",
-        "level": 0
+        "description": "Scikit-learn, Classification, Feature engineering, Modèle prédictif, Régression.",
+        "level": 96
       },
       {
         "title": "MLOps",
-        "description": "À venir.",
-        "level": 0
+        "description": "Docker, Orchestration.",
+        "level": 78
       },
       {
         "title": "Deep Learning",
-        "description": "À venir.",
-        "level": 0
+        "description": "Pytorch, NLP, Récurrent, Tensorflow.",
+        "level": 62
       },
       {
         "title": "RAG",
-        "description": "À venir.",
-        "level": 0
+        "description": "Embedding, Langchain, Vector database.",
+        "level": 88
       }
     ]
   },
   "formation": {
     "title": "Parcours AI Engineer – OpenClassrooms",
     "total_hours": 804,
-    "completed_hours": 284,
-    "current_project": 8,
+    "completed_hours": 334,
+    "current_project": 9,
     "projects_total": 15,
-    "completed_projects_count": 7
+    "completed_projects_count": 8
   },
   "projects": [
     {
@@ -147,11 +147,11 @@
     {
       "id": 8,
       "title": "Confirmez vos compétences en MLOps (partie 2/2)",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/credit-scoring-app",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring-app"
     },
     {

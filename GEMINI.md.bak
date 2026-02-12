@@ -1,0 +1,16 @@
+# CONTEXTE PROJET : training-dashboard
+
+- **Owner** : Damien Guesdon
+- **Catégorie** : Formation_IA
+- **Licence** : MIT (Formation)
+- **Stack Technique** : Web (HTML/CSS/JS)
+
+## 🛠️ STANDARDS APPLICABLES (BRAIN)
+1. **GOUVERNANCE** : Charger ~/.gemini/GEMINI.md (Automatique).
+2. **TECHNIQUE** : Charger ~/Dev/Guesdon-Brain/Standards/std-web.md.
+3. **AUTOMATION** : Charger ~/Dev/Guesdon-Brain/Standards/std-workflow-automation.md.
+4. **COMPORTEMENT** : Charger ~/Dev/Guesdon-Brain/Standards/std-agents-behavior.md.
+
+## 🎯 OBJECTIFS DU PROJET
+- Créer un dashboard de suivi des projets de formation.
+- Dynamiser l'affichage via JavaScript et JSON.

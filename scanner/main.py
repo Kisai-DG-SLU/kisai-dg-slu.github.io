@@ -293,26 +293,6 @@ def scan():
     
     typer.echo(f"✅ Dashboard Intelligence (Recursive) : {completed_count} projets finis.")
 
-    # --- Auto-sync logic ---
-    if True: # On peut imaginer un flag ici
-        typer.echo("🔄 Syncing data to repository...")
-        # On se place à la racine du projet Dashboard pour les commandes Git
-        root_dir = DATA_PATH.parent.parent
-        
-        # Vérifier s'il y a des changements
-        diff = subprocess.run(["git", "diff", DATA_PATH], cwd=root_dir, capture_output=True, text=True).stdout
-        if diff:
-            try:
-                subprocess.run(["git", "add", DATA_PATH], cwd=root_dir, check=True)
-                subprocess.run(["git", "commit", "-m", "auto: update projects.json from scanner"], cwd=root_dir, check=True)
-                # On utilise --rebase pour éviter les conflits si la CI a taggué entre temps
-                subprocess.run(["git", "push", "origin", "main"], cwd=root_dir, check=True)
-                typer.echo("🚀 Data pushed to repository successfully.")
-            except subprocess.CalledProcessError as e:
-                typer.echo(f"❌ Failed to sync data: {e}", err=True)
-        else:
-            typer.echo("ℹ️ No changes detected in projects.json, skipping push.")
-
     # Temporary Debugging for Hook Deployment Paths
     typer.echo("DEBUG: Project repositories paths for hooks deployment:")
     for project_id in range(8, 16):
