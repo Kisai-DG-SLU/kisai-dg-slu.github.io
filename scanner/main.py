@@ -11,6 +11,7 @@ app = typer.Typer()
 
 DATA_PATH = Path(__file__).parent.parent / "data" / "projects.json"
 PROJECTS_ROOT = Path("/Users/daminou/Documents/Formation_IA")
+SPECS_ROOT = Path("/Users/daminou/Dev/Guesdon-Brain/Formation_IA")
 
 def run_local_git_command(command: list[str], cwd: Path) -> Optional[str]:
     try:
@@ -23,14 +24,42 @@ def run_local_git_command(command: list[str], cwd: Path) -> Optional[str]:
 def is_git_repo(path: Path) -> bool:
     return (path / ".git").is_dir()
 
-def calculate_progress_from_tasks(project_dir: Path) -> int:
-    # On cherche current_tasks.md de manière récursive dans le projet
-    tasks_files = list(project_dir.rglob("current_tasks.md"))
-    if not tasks_files:
-        return 0
+def find_current_tasks_file(project_id: int, repo_path: Optional[Path]) -> Optional[Path]:
+    """
+    Cherche le fichier current_tasks.md dans plusieurs emplacements :
+    1. Dans le dépôt Git (repo_path) récursivement
+    2. Dans SPECS_ROOT/Projet_{project_id}/**/specs/current_tasks.md
+    3. Dans SPECS_ROOT/Projet_{project_id}/**/current_tasks.md
+    Retourne le premier fichier trouvé.
+    """
+    # Chercher dans le dépôt Git
+    if repo_path and repo_path.exists():
+        tasks_files = list(repo_path.rglob("current_tasks.md"))
+        if tasks_files:
+            return tasks_files[0]
     
-    # On prend le premier trouvé (généralement le plus proche de la racine)
-    tasks_file = tasks_files[0]
+    # Chercher dans SPECS_ROOT
+    specs_project_dir = SPECS_ROOT / f"Projet_{project_id}"
+    if specs_project_dir.exists():
+        # Chercher récursivement dans specs/current_tasks.md
+        specs_tasks = list(specs_project_dir.rglob("specs/current_tasks.md"))
+        if specs_tasks:
+            return specs_tasks[0]
+        # Chercher récursivement directement current_tasks.md
+        tasks_files = list(specs_project_dir.rglob("current_tasks.md"))
+        if tasks_files:
+            return tasks_files[0]
+    
+    return None
+
+def calculate_progress_from_tasks(project_id: int, repo_path: Optional[Path]) -> int:
+    """
+    Calcule la progression à partir du fichier current_tasks.md.
+    Cherche dans les deux racines (PRODUCTION et SPECS).
+    """
+    tasks_file = find_current_tasks_file(project_id, repo_path)
+    if not tasks_file:
+        return 0
     
     try:
         content = tasks_file.read_text(encoding="utf-8")
@@ -131,15 +160,20 @@ def get_project_intel(project_id: int) -> tuple[ProjectStatus, int, Optional[Pat
         # S'il y a un dépôt Git pour ces projets, on le retourne pour récupérer l'URL
         return status, progress, actual_project_repo_path
 
-    if not actual_project_repo_path:
-        return ProjectStatus.UPCOMING, 0, None
-
-    progress = calculate_progress_from_tasks(actual_project_repo_path)
+    progress = calculate_progress_from_tasks(project_id, actual_project_repo_path)
     
-    if progress == 100 or (actual_project_repo_path / ".completed").exists():
+    if progress == 100:
         return ProjectStatus.COMPLETED, 100, actual_project_repo_path
     
-    return ProjectStatus.IN_PROGRESS, progress, actual_project_repo_path
+    if progress > 0:
+        return ProjectStatus.IN_PROGRESS, progress, actual_project_repo_path
+    
+    # Si pas de progression et pas de dépôt Git, considérer comme à venir
+    if not actual_project_repo_path:
+        return ProjectStatus.UPCOMING, 0, None
+    
+    # Sinon, dépôt Git existe mais progression 0 => en cours avec 0%
+    return ProjectStatus.IN_PROGRESS, 0, actual_project_repo_path
 
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context):
