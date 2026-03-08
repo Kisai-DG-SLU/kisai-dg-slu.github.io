@@ -68,10 +68,10 @@
   "formation": {
     "title": "Parcours AI Engineer – OpenClassrooms",
     "total_hours": 804,
-    "completed_hours": 284,
-    "current_project": 8,
+    "completed_hours": 410,
+    "current_project": 10,
     "projects_total": 15,
-    "completed_projects_count": 7
+    "completed_projects_count": 9
   },
   "projects": [
     {
@@ -147,21 +147,21 @@
     {
       "id": 8,
       "title": "Confirmez vos compétences en MLOps (partie 2/2)",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/credit-scoring-app",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring-app"
     },
     {
       "id": 9,
       "title": "Évaluez les performances d'un LLM",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "50h",
       "link": "https://github.com/Kisai-DG-SLU/cadrage_ia",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/cadrage_ia"
     },
     {
@@ -170,7 +170,7 @@
       "status": "in_progress",
       "duration": "40h",
       "link": "https://github.com/Kisai-DG-SLU/label_image",
-      "progress": 0,
+      "progress": 65,
       "icon": "🔄",
       "github_url": "https://github.com/Kisai-DG-SLU/label_image"
     },

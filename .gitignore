@@ -18,3 +18,9 @@ _bmad/
 # Data exception
 /data/*
 !/data/projects.json
+
+.venv_conda
+venv
+.venv
+__pycache__
+.ipynb_checkpoints

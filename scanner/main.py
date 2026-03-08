@@ -11,6 +11,7 @@ app = typer.Typer()
 
 DATA_PATH = Path(__file__).parent.parent / "data" / "projects.json"
 PROJECTS_ROOT = Path("/Users/daminou/Documents/Formation_IA")
+SPECS_ROOT = Path("/Users/daminou/Dev/Guesdon-Brain/Formation_IA")
 
 def run_local_git_command(command: list[str], cwd: Path) -> Optional[str]:
     try:
@@ -23,14 +24,42 @@ def run_local_git_command(command: list[str], cwd: Path) -> Optional[str]:
 def is_git_repo(path: Path) -> bool:
     return (path / ".git").is_dir()
 
-def calculate_progress_from_tasks(project_dir: Path) -> int:
-    # On cherche current_tasks.md de manière récursive dans le projet
-    tasks_files = list(project_dir.rglob("current_tasks.md"))
-    if not tasks_files:
-        return 0
+def find_current_tasks_file(project_id: int, repo_path: Optional[Path]) -> Optional[Path]:
+    """
+    Cherche le fichier current_tasks.md dans plusieurs emplacements :
+    1. Dans le dépôt Git (repo_path) récursivement
+    2. Dans SPECS_ROOT/Projet_{project_id}/**/specs/current_tasks.md
+    3. Dans SPECS_ROOT/Projet_{project_id}/**/current_tasks.md
+    Retourne le premier fichier trouvé.
+    """
+    # Chercher dans le dépôt Git
+    if repo_path and repo_path.exists():
+        tasks_files = list(repo_path.rglob("current_tasks.md"))
+        if tasks_files:
+            return tasks_files[0]
     
-    # On prend le premier trouvé (généralement le plus proche de la racine)
-    tasks_file = tasks_files[0]
+    # Chercher dans SPECS_ROOT
+    specs_project_dir = SPECS_ROOT / f"Projet_{project_id}"
+    if specs_project_dir.exists():
+        # Chercher récursivement dans specs/current_tasks.md
+        specs_tasks = list(specs_project_dir.rglob("specs/current_tasks.md"))
+        if specs_tasks:
+            return specs_tasks[0]
+        # Chercher récursivement directement current_tasks.md
+        tasks_files = list(specs_project_dir.rglob("current_tasks.md"))
+        if tasks_files:
+            return tasks_files[0]
+    
+    return None
+
+def calculate_progress_from_tasks(project_id: int, repo_path: Optional[Path]) -> int:
+    """
+    Calcule la progression à partir du fichier current_tasks.md.
+    Cherche dans les deux racines (PRODUCTION et SPECS).
+    """
+    tasks_file = find_current_tasks_file(project_id, repo_path)
+    if not tasks_file:
+        return 0
     
     try:
         content = tasks_file.read_text(encoding="utf-8")
@@ -49,28 +78,52 @@ def convert_ssh_to_https_url(ssh_url: str) -> str:
     return ssh_url
 
 
-def read_mission_description(repo_path: Path) -> Optional[str]:
-    # Check specs/ first (current behavior)
-    mission_file_specs = repo_path / "specs" / "description_mission.md"
-    if mission_file_specs.exists():
-        typer.echo(f"DEBUG: Found mission description file at: {mission_file_specs}")
-        try:
-            return mission_file_specs.read_text(encoding="utf-8")
-        except Exception as e:
-            typer.echo(f"Warning: Could not read mission description for {repo_path}: {e}", err=True)
-            return None
-            
-    # Check root/ second (requested behavior)
-    mission_file_root = repo_path / "description_mission.md"
-    if mission_file_root.exists():
-        typer.echo(f"DEBUG: Found mission description file at: {mission_file_root}")
-        try:
-            return mission_file_root.read_text(encoding="utf-8")
-        except Exception as e:
-            typer.echo(f"Warning: Could not read mission description for {repo_path}: {e}", err=True)
-            return None
+def find_mission_description_file(project_id: int, repo_path: Optional[Path]) -> Optional[Path]:
+    """
+    Cherche le fichier description_mission.md dans plusieurs emplacements :
+    1. Dans le dépôt Git (repo_path) récursivement dans specs/description_mission.md
+    2. Dans le dépôt Git (repo_path) récursivement dans description_mission.md
+    3. Dans SPECS_ROOT/Projet_{project_id}/**/specs/description_mission.md
+    4. Dans SPECS_ROOT/Projet_{project_id}/**/description_mission.md
+    Retourne le premier fichier trouvé.
+    """
+    # Chercher dans le dépôt Git
+    if repo_path and repo_path.exists():
+        # Chercher récursivement dans specs/description_mission.md
+        mission_files_specs = list(repo_path.rglob("specs/description_mission.md"))
+        if mission_files_specs:
+            return mission_files_specs[0]
+        # Chercher récursivement directement description_mission.md
+        mission_files_root = list(repo_path.rglob("description_mission.md"))
+        if mission_files_root:
+            return mission_files_root[0]
+    
+    # Chercher dans SPECS_ROOT
+    specs_project_dir = SPECS_ROOT / f"Projet_{project_id}"
+    if specs_project_dir.exists():
+        # Chercher récursivement dans specs/description_mission.md
+        specs_mission_specs = list(specs_project_dir.rglob("specs/description_mission.md"))
+        if specs_mission_specs:
+            return specs_mission_specs[0]
+        # Chercher récursivement directement description_mission.md
+        specs_mission_root = list(specs_project_dir.rglob("description_mission.md"))
+        if specs_mission_root:
+            return specs_mission_root[0]
+    
+    return None
 
-    typer.echo(f"DEBUG: No mission description file found at: {mission_file_specs} or {mission_file_root}")
+
+def read_mission_description(project_id: int, repo_path: Optional[Path]) -> Optional[str]:
+    mission_file = find_mission_description_file(project_id, repo_path)
+    if mission_file:
+        typer.echo(f"DEBUG: Found mission description file at: {mission_file}")
+        try:
+            return mission_file.read_text(encoding="utf-8")
+        except Exception as e:
+            typer.echo(f"Warning: Could not read mission description for {mission_file}: {e}", err=True)
+            return None
+    else:
+        typer.echo(f"DEBUG: No mission description file found for project {project_id}")
     return None
 
 # Définition des mots-clés pour chaque compétence AI
@@ -131,15 +184,20 @@ def get_project_intel(project_id: int) -> tuple[ProjectStatus, int, Optional[Pat
         # S'il y a un dépôt Git pour ces projets, on le retourne pour récupérer l'URL
         return status, progress, actual_project_repo_path
 
-    if not actual_project_repo_path:
-        return ProjectStatus.UPCOMING, 0, None
-
-    progress = calculate_progress_from_tasks(actual_project_repo_path)
+    progress = calculate_progress_from_tasks(project_id, actual_project_repo_path)
     
-    if progress == 100 or (actual_project_repo_path / ".completed").exists():
+    if progress == 100:
         return ProjectStatus.COMPLETED, 100, actual_project_repo_path
     
-    return ProjectStatus.IN_PROGRESS, progress, actual_project_repo_path
+    if progress > 0:
+        return ProjectStatus.IN_PROGRESS, progress, actual_project_repo_path
+    
+    # Si pas de progression et pas de dépôt Git, considérer comme à venir
+    if not actual_project_repo_path:
+        return ProjectStatus.UPCOMING, 0, None
+    
+    # Sinon, dépôt Git existe mais progression 0 => en cours avec 0%
+    return ProjectStatus.IN_PROGRESS, 0, actual_project_repo_path
 
 @app.callback(invoke_without_command=True)
 def main(ctx: typer.Context):
@@ -185,7 +243,7 @@ def scan():
 
         # --- Skills Analysis Logic ---
         if actual_project_repo_path and project.status != ProjectStatus.UPCOMING:
-            mission_content = read_mission_description(actual_project_repo_path)
+            mission_content = read_mission_description(project.id, actual_project_repo_path)
             if mission_content:
                 typer.echo(f"DEBUG: Project {project.id} - Mission content read: {mission_content[:100]}...")
                 # analyze_project_skills retourne maintenant la contribution brute (non pondérée)
@@ -292,26 +350,6 @@ def scan():
         json.dump(data.model_dump(), f, indent=2, ensure_ascii=False)
     
     typer.echo(f"✅ Dashboard Intelligence (Recursive) : {completed_count} projets finis.")
-
-    # --- Auto-sync logic ---
-    if True: # On peut imaginer un flag ici
-        typer.echo("🔄 Syncing data to repository...")
-        # On se place à la racine du projet Dashboard pour les commandes Git
-        root_dir = DATA_PATH.parent.parent
-        
-        # Vérifier s'il y a des changements
-        diff = subprocess.run(["git", "diff", DATA_PATH], cwd=root_dir, capture_output=True, text=True).stdout
-        if diff:
-            try:
-                subprocess.run(["git", "add", DATA_PATH], cwd=root_dir, check=True)
-                subprocess.run(["git", "commit", "-m", "auto: update projects.json from scanner"], cwd=root_dir, check=True)
-                # On utilise --rebase pour éviter les conflits si la CI a taggué entre temps
-                subprocess.run(["git", "push", "origin", "main"], cwd=root_dir, check=True)
-                typer.echo("🚀 Data pushed to repository successfully.")
-            except subprocess.CalledProcessError as e:
-                typer.echo(f"❌ Failed to sync data: {e}", err=True)
-        else:
-            typer.echo("ℹ️ No changes detected in projects.json, skipping push.")
 
     # Temporary Debugging for Hook Deployment Paths
     typer.echo("DEBUG: Project repositories paths for hooks deployment:")
