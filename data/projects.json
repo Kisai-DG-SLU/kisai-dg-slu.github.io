@@ -34,28 +34,34 @@
     ],
     "ai": [
       {
-        "name": "Python",
-        "score": 95
+        "title": "Python",
+        "level": 95,
+        "description": "Langage principal pour data science et backend."
       },
       {
-        "name": "Git_CI_CD",
-        "score": 90
+        "title": "Git_CI_CD",
+        "level": 90,
+        "description": "Versioning, intégration et déploiement continus."
       },
       {
-        "name": "ML",
-        "score": 85
+        "title": "ML",
+        "level": 85,
+        "description": "Modélisation supervisée et non supervisée."
       },
       {
-        "name": "MLOps",
-        "score": 85
+        "title": "MLOps",
+        "level": 85,
+        "description": "Pipeline ML, monitoring, déploiement scalable."
       },
       {
-        "name": "DL",
-        "score": 80
+        "title": "DL",
+        "level": 80,
+        "description": "Réseaux de neurones profonds (CNN, RNN, Transformers)."
       },
       {
-        "name": "LLM_RAG",
-        "score": 90
+        "title": "LLM_RAG",
+        "level": 90,
+        "description": "LLMs, Retrieval-Augmented Generation, fine-tuning."
       }
     ]
   },
