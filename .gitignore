@@ -24,3 +24,9 @@ venv
 .venv
 __pycache__
 .ipynb_checkpoints
+# Node modules
+node_modules/
+# Build platform binaries
+rollup.linux-x64-gnu.node
+rollup.linux-x64-musl.node
+downloaded-@esbuild-linux-x64-esbuild
