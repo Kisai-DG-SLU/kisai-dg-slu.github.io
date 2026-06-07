@@ -35,32 +35,32 @@
     "ai": [
       {
         "title": "Python",
-        "level": 95,
+        "level": 100,
         "description": "Langage principal pour data science et backend."
       },
       {
         "title": "Git_CI_CD",
-        "level": 90,
+        "level": 100,
         "description": "Versioning, intégration et déploiement continus."
       },
       {
         "title": "ML",
-        "level": 85,
+        "level": 100,
         "description": "Modélisation supervisée et non supervisée."
       },
       {
         "title": "MLOps",
-        "level": 85,
+        "level": 100,
         "description": "Pipeline ML, monitoring, déploiement scalable."
       },
       {
         "title": "DL",
-        "level": 80,
+        "level": 100,
         "description": "Réseaux de neurones profonds (CNN, RNN, Transformers)."
       },
       {
         "title": "LLM_RAG",
-        "level": 90,
+        "level": 100,
         "description": "LLMs, Retrieval-Augmented Generation, fine-tuning."
       }
     ]
