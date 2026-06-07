@@ -34,44 +34,38 @@
     ],
     "ai": [
       {
-        "title": "Python",
-        "description": "À venir.",
-        "level": 0
+        "name": "Python",
+        "score": 95
       },
       {
-        "title": "Git & GitHub",
-        "description": "À venir.",
-        "level": 0
+        "name": "Git_CI_CD",
+        "score": 90
       },
       {
-        "title": "Machine Learning",
-        "description": "À venir.",
-        "level": 0
+        "name": "ML",
+        "score": 85
       },
       {
-        "title": "MLOps",
-        "description": "À venir.",
-        "level": 0
+        "name": "MLOps",
+        "score": 85
       },
       {
-        "title": "Deep Learning",
-        "description": "À venir.",
-        "level": 0
+        "name": "DL",
+        "score": 80
       },
       {
-        "title": "RAG",
-        "description": "À venir.",
-        "level": 0
+        "name": "LLM_RAG",
+        "score": 90
       }
     ]
   },
   "formation": {
     "title": "Parcours AI Engineer – OpenClassrooms",
     "total_hours": 804,
-    "completed_hours": 410,
-    "current_project": 10,
+    "completed_hours": 804,
+    "current_project": 15,
     "projects_total": 15,
-    "completed_projects_count": 9
+    "completed_projects_count": 15
   },
   "projects": [
     {
@@ -167,62 +161,65 @@
     {
       "id": 10,
       "title": "Labellisez et appliquez des approches semi-supervisées",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "40h",
       "link": "https://github.com/Kisai-DG-SLU/label_image",
-      "progress": 65,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/label_image"
     },
     {
       "id": 11,
       "title": "Entraînez votre agent RL",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/atterrisseur_lunaire",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/atterrisseur_lunaire"
     },
     {
       "id": 12,
       "title": "Extrayez des données multimodales de sites web",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/fakenews_killer",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/fakenews_killer"
     },
     {
       "id": 13,
       "title": "Mettez en place des Agents IA",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/chess_master",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/chess_master"
     },
     {
       "id": 14,
       "title": "Finetunez votre propre LLM",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "80h",
       "link": "https://github.com/Kisai-DG-SLU/poso_logic",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/poso_logic"
     },
     {
       "id": 15,
       "title": "Réalisez le portfolio Ingénieur IA",
-      "status": "in_progress",
+      "status": "completed",
       "duration": "60h",
       "link": "https://github.com/Kisai-DG-SLU/portfolio",
-      "progress": 0,
-      "icon": "🔄",
+      "progress": 100,
+      "icon": "✅",
       "github_url": "https://github.com/Kisai-DG-SLU/portfolio"
     }
-  ]
+  ],
+  "completed_hours": 804,
+  "current_project": 15,
+  "completed_projects_count": 15
 }
