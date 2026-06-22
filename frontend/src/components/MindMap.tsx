@@ -52,6 +52,10 @@ export default function MindMap() {
         svg.removeAttribute("height");
         svg.setAttribute("style", "width: 100%; height: auto; max-width: 4353px; display: block;");
 
+        const style = doc.createElementNS("http://www.w3.org/2000/svg", "style");
+        style.textContent = "a { cursor: pointer; pointer-events: auto; }";
+        svg.prepend(style);
+
         const serializer = new XMLSerializer();
         setSvgContent(serializer.serializeToString(svg));
       } catch (err) {
@@ -90,7 +94,7 @@ export default function MindMap() {
               limitToBounds={false}
               centerOnInit={true}
               centerZoomedOut={true}
-              doubleClick={{ mode: "reset", animationTime: 0.3 }}
+              panning={{ excluded: ["a"] }}
               wheel={{ step: 0.03 }}
               zoomAnimation={{ animationTime: 0.2, animationType: "easeOutQuad" }}
               velocityAnimation={{ animationTime: 0.2 }}
@@ -111,7 +115,7 @@ export default function MindMap() {
               <div className="flex justify-center gap-6 mt-3 text-sm text-gray-400">
                 <span>🖱 Molette pour zoomer</span>
                 <span>✋ Glisser pour naviguer</span>
-                <span>🖱 Double-clic pour réinitialiser</span>
+                <span>🔗 Cliquez les liens pour ouvrir les projets</span>
               </div>
             </TransformWrapper>
           )}
