@@ -66,6 +66,17 @@ export default function MindMap() {
     })();
   }, []);
 
+  useEffect(() => {
+    const el = svgContainerRef.current;
+    if (!el) return;
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Element;
+      if (target.closest("a")) e.stopPropagation();
+    };
+    el.addEventListener("mousedown", handler, true);
+    return () => el.removeEventListener("mousedown", handler, true);
+  }, [svgContent]);
+
   return (
     <section className="py-16 px-4">
       <div className="max-w-[1248px] mx-auto">
@@ -88,14 +99,13 @@ export default function MindMap() {
 
           {svgContent && (
             <TransformWrapper
-              initialScale={0.27}
-              minScale={0.12}
-              maxScale={3}
+              initialScale={0.35}
+              minScale={0.15}
+              maxScale={12}
               limitToBounds={false}
               centerOnInit={true}
               centerZoomedOut={true}
-              panning={{ excluded: ["a"] }}
-              wheel={{ step: 0.03 }}
+              wheel={{ step: 0.05 }}
               zoomAnimation={{ animationTime: 0.2, animationType: "easeOutQuad" }}
               velocityAnimation={{ animationTime: 0.2 }}
             >
