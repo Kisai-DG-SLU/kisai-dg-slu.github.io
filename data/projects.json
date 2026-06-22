@@ -82,7 +82,9 @@
       "link": "https://github.com/Kisai-DG-SLU/decouverte_IA_engineer",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/decouverte_IA_engineer"
+      "github_url": "https://github.com/Kisai-DG-SLU/decouverte_IA_engineer",
+      "category": "Cadrage",
+      "short_description": "Analyse des opportunités d'IA, fondamentaux du rôle et structuration des premiers livrables."
     },
     {
       "id": 2,
@@ -92,7 +94,9 @@
       "link": "https://github.com/Kisai-DG-SLU/fashion-trend-intelligence",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/fashion-trend-intelligence"
+      "github_url": "https://github.com/Kisai-DG-SLU/fashion-trend-intelligence",
+      "category": "Cloud & APIs",
+      "short_description": "Requêtage d'API de services IA, stockage de données multimédias et manipulation d'images."
     },
     {
       "id": 3,
@@ -102,7 +106,9 @@
       "link": "https://github.com/Kisai-DG-SLU/seattle-energy-prediction",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/seattle-energy-prediction"
+      "github_url": "https://github.com/Kisai-DG-SLU/seattle-energy-prediction",
+      "category": "Machine Learning",
+      "short_description": "Prédiction des émissions de CO2, feature engineering, nettoyage de données et régression."
     },
     {
       "id": 4,
@@ -112,7 +118,9 @@
       "link": "https://github.com/Kisai-DG-SLU/attrition-esn",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/attrition-esn"
+      "github_url": "https://github.com/Kisai-DG-SLU/attrition-esn",
+      "category": "Machine Learning",
+      "short_description": "Identification des causes d'attrition clients, algorithmes de classification et interprétabilité (SHAP)."
     },
     {
       "id": 5,
@@ -122,7 +130,9 @@
       "link": "https://github.com/Kisai-DG-SLU/attrition-esn-model",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/attrition-esn-model"
+      "github_url": "https://github.com/Kisai-DG-SLU/attrition-esn-model",
+      "category": "Architecture API",
+      "short_description": "Déploiement d'un modèle ML sous forme d'API FastAPI, conteneurisation Docker et tests."
     },
     {
       "id": 6,
@@ -132,7 +142,9 @@
       "link": "https://github.com/Kisai-DG-SLU/credit-scoring",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring"
+      "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring",
+      "category": "MLOps & DevOps",
+      "short_description": "Pipeline MLOps complexe pour Prêt à dépenser, tracking MLflow, dashboards Streamlit et monitoring de data drift."
     },
     {
       "id": 7,
@@ -142,7 +154,9 @@
       "link": "https://github.com/Kisai-DG-SLU/culture-ia",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/culture-ia"
+      "github_url": "https://github.com/Kisai-DG-SLU/culture-ia",
+      "category": "IA Générative",
+      "short_description": "Conception d'une architecture RAG sur mesure pour la base de connaissances clients, base vectorielle Milvus."
     },
     {
       "id": 8,
@@ -152,7 +166,9 @@
       "link": "https://github.com/Kisai-DG-SLU/credit-scoring-app",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring-app"
+      "github_url": "https://github.com/Kisai-DG-SLU/credit-scoring-app",
+      "category": "Infrastructure",
+      "short_description": "Validation globale des compétences MLOps avancées, pipelines CI/CD robustes et automatisation GitHub Actions."
     },
     {
       "id": 9,
@@ -162,7 +178,9 @@
       "link": "https://github.com/Kisai-DG-SLU/cadrage_ia",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/cadrage_ia"
+      "github_url": "https://github.com/Kisai-DG-SLU/cadrage_ia",
+      "category": "Gestion de Projet",
+      "short_description": "Cadrage d'un projet IA complet : rédaction d'une note de cadrage, analyse des risques juridiques et RGPD."
     },
     {
       "id": 10,
@@ -172,7 +190,9 @@
       "link": "https://github.com/Kisai-DG-SLU/label_image",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/label_image"
+      "github_url": "https://github.com/Kisai-DG-SLU/label_image",
+      "category": "Deep Learning",
+      "short_description": "Labellisation automatisée d'images médicales, transfer learning et segmentation fine (SegFormer)."
     },
     {
       "id": 11,
@@ -182,7 +202,9 @@
       "link": "https://github.com/Kisai-DG-SLU/atterrisseur_lunaire",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/atterrisseur_lunaire"
+      "github_url": "https://github.com/Kisai-DG-SLU/atterrisseur_lunaire",
+      "category": "Reinforcement",
+      "short_description": "Entraînement d'un agent par apprentissage par renforcement (Stable-Baselines3, Gymnasium)."
     },
     {
       "id": 12,
@@ -192,7 +214,9 @@
       "link": "https://github.com/Kisai-DG-SLU/fakenews_killer",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/fakenews_killer"
+      "github_url": "https://github.com/Kisai-DG-SLU/fakenews_killer",
+      "category": "Multimédia & NLP",
+      "short_description": "Traitement de données multimédias complexes, détection d'anomalies, pipeline d'anonymisation Presidio."
     },
     {
       "id": 13,
@@ -202,7 +226,9 @@
       "link": "https://github.com/Kisai-DG-SLU/chess_master",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/chess_master"
+      "github_url": "https://github.com/Kisai-DG-SLU/chess_master",
+      "category": "Multi-Agents",
+      "short_description": "Architecture d'agents spécialisés collaboratifs via LangGraph pour la prise de décision stratégique."
     },
     {
       "id": 14,
@@ -212,7 +238,9 @@
       "link": "https://github.com/Kisai-DG-SLU/poso_logic",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/poso_logic"
+      "github_url": "https://github.com/Kisai-DG-SLU/poso_logic",
+      "category": "LLM Avancé",
+      "short_description": "Fine-tuning de LLM via LoRA, optimisation des hyperparamètres, évaluation qualitative automatisée (Ragas)."
     },
     {
       "id": 15,
@@ -222,10 +250,82 @@
       "link": "https://github.com/Kisai-DG-SLU/portfolio",
       "progress": 100,
       "icon": "✅",
-      "github_url": "https://github.com/Kisai-DG-SLU/portfolio"
+      "github_url": "https://github.com/Kisai-DG-SLU/portfolio",
+      "category": "Restitution",
+      "short_description": "Soutenance finale du cursus, capitalisation complète des livrables et démonstration de la capacité réflexive."
     }
   ],
   "completed_hours": 804,
   "current_project": 15,
-  "completed_projects_count": 15
+  "completed_projects_count": 15,
+  "expertise_matrix": {
+    "columns": [
+      {
+        "title": "Industrialisation",
+        "subtitle": "★★★★★",
+        "items": [
+          {
+            "name": "Infra & MLOps",
+            "tags": "CI/CD, Docker, GitHub Actions, GPU, Kubernetes, MLOps, OKD, OpenShift"
+          },
+          {
+            "name": "Data & Backend",
+            "tags": "ETL, FastAPI, PostgreSQL"
+          },
+          {
+            "name": "IA & Modèles",
+            "tags": "Feature Engineering, Fine-tuning LLM, LangGraph, LoRA, Profiling, Transfer Learning, vLLM"
+          }
+        ]
+      },
+      {
+        "title": "Autonomie Opérationnelle",
+        "subtitle": "★★★★☆",
+        "items": [
+          {
+            "name": "Cloud, Infra & Outils",
+            "tags": "Architecture Cloud, Azure, Estimation coûts, Git, Jupyter, RGPD, Streamlit"
+          },
+          {
+            "name": "Data & Ingénierie",
+            "tags": "Airflow, Angular, MongoDB, Pandas, Pytest, Python basics, Web Scraping, python-dotenv"
+          },
+          {
+            "name": "IA Gen, NLP & Vision",
+            "tags": "API HuggingFace, FAISS, LangChain, Milvus, Mistral AI, NLP, Presidio, PyTorch, RAG, Ragas, SegFormer, Vision"
+          },
+          {
+            "name": "ML & Reinforcement",
+            "tags": "Clustering, Data Drift, DPO, Evidently AI, Gymnasium, Imbalanced Learning, LightGBM, Matplotlib, MLflow, Optuna, Régression, RL, Scikit-learn, Seaborn, SHAP, Stable-Baselines3, XGBoost"
+          }
+        ]
+      },
+      {
+        "title": "Gouvernance & Stratégie",
+        "items": [
+          {
+            "name": "Leadership & Stratégie",
+            "tags": "Analyse métier RH, Conseil stratégique, Éthique IA, Gestion de projet (complexe), Gestion des risques, Leadership technique, Management d'experts, Stratégie, Vision business, Vision stratégique"
+          },
+          {
+            "name": "Communication",
+            "tags": "Communication COMEX / technique, Data Storytelling, Pédagogie, Synthèse pour décideurs, Visualisation, Vulgarisation"
+          }
+        ]
+      },
+      {
+        "title": "Architecture & Ingénierie",
+        "items": [
+          {
+            "name": "Conception & Opérations",
+            "tags": "Amélioration continue, Analyse coût/bénéfice, Architecture données/Infra/Réseau, DevOps mindset, Esprit d'analyse, Full-stack mindset, Méthodologie scientifique, Monitoring & Alerting, Organisation, Résilience, Résolution de problèmes, Software Engineering, Tests & Qualité"
+          },
+          {
+            "name": "Rigueur & Autonomie",
+            "tags": "Autonomie technique, Curiosité, Design solution IA, Documentation, Évaluation qualitative, Interprétabilité, Expérimentation, Rédaction (cadrage/technique), Rigueur"
+          }
+        ]
+      }
+    ]
+  }
 }

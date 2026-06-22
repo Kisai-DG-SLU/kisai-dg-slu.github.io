@@ -24,7 +24,6 @@ export enum ProjectStatus {
   UPCOMING = 'upcoming',
 }
 
-
 export interface Project {
   id: number;
   title: string;
@@ -34,10 +33,28 @@ export interface Project {
   link?: string;
   icon: string;
   github_url?: string;
+  category: string;
+  short_description: string;
+}
+
+export interface ExpertiseCategory {
+  title: string;
+  subtitle?: string;
+  items: ExpertiseItem[];
+}
+
+export interface ExpertiseItem {
+  name: string;
+  tags: string;
+}
+
+export interface ExpertiseMatrix {
+  columns: ExpertiseCategory[];
 }
 
 export interface DashboardData {
   skills: Skills;
   formation: Formation;
   projects: Project[];
+  expertise_matrix: ExpertiseMatrix;
 }
