@@ -1,5 +1,34 @@
 import { useState, useEffect, useRef } from "react";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
+
+function Controls() {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+  return (
+    <div className="flex justify-center gap-3 mt-4">
+      <button
+        onClick={() => zoomOut(0.2)}
+        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors"
+        title="Zoom arrière"
+      >
+        − Zoom
+      </button>
+      <button
+        onClick={() => resetTransform(0.3)}
+        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors"
+        title="Réinitialiser"
+      >
+        ↺ Réinitialiser
+      </button>
+      <button
+        onClick={() => zoomIn(0.2)}
+        className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors"
+        title="Zoom avant"
+      >
+        + Zoom
+      </button>
+    </div>
+  );
+}
 
 export default function MindMap() {
   const [loading, setLoading] = useState(true);
@@ -21,7 +50,7 @@ export default function MindMap() {
 
         svg.removeAttribute("width");
         svg.removeAttribute("height");
-        svg.setAttribute("style", "width: 100%; height: auto; max-width: 4353px;");
+        svg.setAttribute("style", "width: 100%; height: auto; max-width: 4353px; display: block;");
 
         const serializer = new XMLSerializer();
         setSvgContent(serializer.serializeToString(svg));
@@ -55,14 +84,19 @@ export default function MindMap() {
 
           {svgContent && (
             <TransformWrapper
-              initialScale={0.6}
-              minScale={0.3}
-              maxScale={5}
+              initialScale={0.27}
+              minScale={0.12}
+              maxScale={3}
+              limitToBounds={false}
               centerOnInit={true}
-              wheel={{ step: 0.15 }}
+              centerZoomedOut={true}
+              doubleClick={{ mode: "reset", animationTime: 0.3 }}
+              wheel={{ step: 0.03 }}
+              zoomAnimation={{ animationTime: 0.2, animationType: "easeOutQuad" }}
+              velocityAnimation={{ animationTime: 0.2 }}
             >
               <TransformComponent
-                wrapperStyle={{ width: "100%", height: "700px" }}
+                wrapperStyle={{ width: "100%", minHeight: "600px" }}
                 contentStyle={{ width: "100%", height: "100%" }}
               >
                 <div
@@ -71,13 +105,16 @@ export default function MindMap() {
                   style={{ cursor: "grab" }}
                 />
               </TransformComponent>
+
+              <Controls />
+
+              <div className="flex justify-center gap-6 mt-3 text-sm text-gray-400">
+                <span>🖱 Molette pour zoomer</span>
+                <span>✋ Glisser pour naviguer</span>
+                <span>🖱 Double-clic pour réinitialiser</span>
+              </div>
             </TransformWrapper>
           )}
-
-          <div className="flex justify-center gap-6 mt-4 text-sm text-gray-400">
-            <span>🖱 Molette pour zoomer</span>
-            <span>✋ Glisser pour naviguer</span>
-          </div>
         </div>
       </div>
     </section>
