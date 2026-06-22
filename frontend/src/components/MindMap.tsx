@@ -99,7 +99,7 @@ export default function MindMap() {
 
           {svgContent && (
             <TransformWrapper
-              initialScale={0.35}
+              initialScale={1}
               minScale={0.15}
               maxScale={12}
               limitToBounds={false}
